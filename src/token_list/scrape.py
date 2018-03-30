@@ -1,6 +1,9 @@
+import multiprocessing
 import requests
 from bs4 import BeautifulSoup
 
+
+import sql
 
 
 def generate_token_links():
@@ -33,24 +36,23 @@ def scrape_coin_info(link):
     #links like website & explorer
     bs_links = soup.find("ul",{"class":"list-unstyled"}).find_all("a")
     for bs_link in bs_links:
-        ret[ bs_link.get_text()] = bs_link.attrs['href']
+        ret[ bs_link.get_text().replace(" ",'')] = bs_link.attrs['href']
     return ret
 
 
 def main():
     links = list(generate_token_links())
+    writer = sql.Tokens('adfunnel.tokens')
+
+    #p = multiprocessing.Pool()
+    #for data in p.imap_unordered(scrape_coin_info, links):
+        #writer.write_later(data)
+
     for link in links:
-        print scrape_coin_info(link)
-
-
-
-
-
-
-
-
-
-
+        data = scrape_coin_info(link)
+        print data
+        writer.write_later(data)
+        writer.write_all()
 
 if __name__ == "__main__":
     main()
