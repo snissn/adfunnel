@@ -1,0 +1,20 @@
+create table adfunnel.tokens (
+	id bigserial primary key,
+	title text ,
+	ticker text,
+	image text,
+	Announcement text,
+	Chat text,
+	Chat2 text,
+	Explorer text,
+	Explorer2 text,
+	Explorer3 text,
+	MessageBoard text,
+	MessageBoard2 text,
+	SourceCode text,
+	Website text,
+	Website2 text,
+	created timestamp default now(),
+	modified timestamp default now(),
+	unique(title, ticker)
+);
