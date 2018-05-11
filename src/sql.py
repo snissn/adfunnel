@@ -41,7 +41,7 @@ class SQL(object):
     self.con.close()
 
   def connect(self):
-    username=os.getlogin()
+    username='mike'#os.getlogin()
     password=open("db_password").read().strip() 
     self.connection_string = "postgresql://{username}:{password}@localhost/postgres".format(username=username,password=password)
     self.con = psycopg2.connect(self.connection_string)
@@ -260,7 +260,7 @@ class Tweet(DatePartition):
     keys_comma = ", ".join(keys + [ 'modified'] )
     excludeds = [' EXCLUDED.{key}'.format(key=key) for key in keys] + ["NOW()"]
     excludeds = ' , '.join(excludeds)
-    return ' on conflict (id, organization_id) do nothing' #update set (' + keys_comma + ")   = (" + excludeds + ") ;"
+    return ' on conflict (id, token_id) do nothing' #update set (' + keys_comma + ")   = (" + excludeds + ") ;"
 
   def write_all(self):
     for table_name in self.rows_dates:

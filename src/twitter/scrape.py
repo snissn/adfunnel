@@ -1,4 +1,9 @@
 import datetime
+import time
+import sys
+import traceback
+import random
+import json
 import tweepy
 from dateutil.parser import parse as parse_date
 
@@ -7,18 +12,22 @@ import sql
 sql_client = sql.SQL()
 write_tweets = sql.Tweet()
 write_tweets.tablename = 'adfunnel.tweets'
-public  ="Wz3SQk2w3tuCFbN091yBu9iYa"
-secret = "3hS24EzWcs5Gend8oZScQsSVSHq4W1puWLXOgQ5p0ecMaTdud4"
-auth = tweepy.AppAuthHandler(public, secret)
-client = tweepy.API(auth, wait_on_rate_limit=True,
-                   wait_on_rate_limit_notify=True)
+api_credentials = json.loads(open("../api_credentials.json").read())
 #print client.user_timeline(username,count=200, tweet_mode='extended')
+
+def get_client():
+  key = random.choice(api_credentials)
+  auth = tweepy.AppAuthHandler(key['key'], key['secret'])
+  client = tweepy.API(auth, wait_on_rate_limit=True,
+                     wait_on_rate_limit_notify=True)
+    
+  return client
 
 def write_format(tweet, organization_id):
     cutoff =  datetime.datetime.now()-datetime.timedelta(weeks=1)
     data = {}
     data['id'] = tweet.id
-    data['organization_id'] = organization_id
+    data['token_id'] = organization_id
     data['type'] = 'tweet'
     data['url_id'] = None
     data['text'] = tweet.full_text
@@ -56,22 +65,34 @@ def write_format(tweet, organization_id):
 
 
 def scrape(row):
-  max_tweets = 1000
+  max_tweets = 100
+  client = get_client()
   query = "{} OR ${}".format(row['title'], row['ticker'])
   for status in tweepy.Cursor(client.search, q=query, tweet_mode='extended').items(max_tweets):
     writeme = write_format(status, row['id'])
     write_tweets.write_later(writeme)
   write_tweets.write_all()
 
-def main():
+def main(limit_arg):
+  limit=""
+  if limit_arg:
+    limit = "limit " + limit_arg
+  print 'limit', limit
   while True:
-    for row in sql_client.read_raw( "select id , title, ticker from adfunnel.tokens"):
-      print row
+    for row in sql_client.read_raw( "select id , title, ticker from adfunnel.tokens order by id asc "+limit):
       try:
+        print row
         scrape(row)
       except Exception as oops:
         print oops
+        traceback.print_stack()
+    time.sleep(30)
+
 if __name__=="__main__":
-  main()
+  if len(sys.argv)==1:
+    limit = None
+  else:
+    limit = sys.argv[1]
+  main(limit)
 
 
