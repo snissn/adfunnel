@@ -6,6 +6,9 @@ $trending_rows = get_trending();
 ?>
 <html>
   <head>
+    <title>Cryptocurrency Ranking & Sentiment Analysis</title>
+    <meta name="description" content="AdFunnel Project aim to help fellow cryptocurrency traders to stay informed with the latest development & update with any cryptocurrencies that they're interested in from various social media and news sources">
+    <meta name="keywords" content="AdFunnel, FNL, cryptocurrency, blockchain">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS Dependencies -->
