@@ -1,8 +1,6 @@
 <?php 
 require("db.php");
-
 $trending_rows = get_trending();
-
 ?>
 <html>
   <head>
@@ -26,7 +24,7 @@ $trending_rows = get_trending();
 
 
       <div class="col-lg-12">
-<h1>Trending Cryptocurrencies over the last 24 hours on Twitter</h1>
+<h1 class="title_des">Trending Cryptocurrencies over the last 24 hours on Twitter</h1>
 <div class="bs-component">
       <table class="table table-hover">
                 <thead>
