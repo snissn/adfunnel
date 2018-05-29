@@ -10,10 +10,13 @@ width: 100%;}
 .navbar-nav ml-auto{float: left;
 width: 100%;}
 
-..main_text h1{
+.main_text h1{
 font-size: 34px;
 text-align: right;}
 
 
 .title_des{font-size: 37px;
 margin: 14px 0;}
+
+.logo a{font-size:0;}
+
