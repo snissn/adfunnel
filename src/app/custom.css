@@ -20,3 +20,99 @@ margin: 14px 0;}
 
 .logo a{font-size:0;}
 
+/**** Sunil css ***/
+
+
+.navbar {
+    position: relative;
+    border-bottom: 1px solid #ebeaea;
+    box-shadow: 0 13px 40px -11px #ccc;
+    padding: 10px 0;
+}
+.navbar-dark .navbar-nav .nav-link {
+	font-family: 'Poppins', sans-serif;
+    color: #212121;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 700;
+    transition: none;
+    text-transform: uppercase;
+}
+.navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+    color: #029445;
+}
+ul.navbar-nav.text-uppercase.ml-auto {
+    padding-right: 190px;
+}
+.search-icon:after {
+    content: "\f002";
+}
+.search-icon {
+    position: relative;
+    top: 5px;
+    left: 30px;
+}
+.search-icon:after, .search-icon.active:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: fontawesome;
+    z-index: 100;
+    cursor: pointer;
+}
+.search-box-wrap .search-form {
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    top: 65px;
+    z-index: 1;
+}
+.search-form {
+    position: relative;
+}
+.search-box-wrap .search-form .form-control {
+    border: 0;
+    color: #ffffff;
+    padding: 0 15px;
+    outline: none;
+    font-size: 30px;
+    text-align: center;
+    background-color: #029445;
+    line-height: 70px;
+    height: 70px;
+    font-weight: 500;
+    -webkit-transform: translateZ(0);
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15);
+}
+.search-form .form-control {
+    font-size: 14px;
+    font-weight: 300;
+    color: #666;
+}
+.form-control {
+    height: 50px;
+    padding: 10px 15px;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 300;
+    color: #202020;
+    border: 1px solid #eee;
+    border-radius: 0;
+}
+.search-form button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 60px;
+    background-color: transparent;
+    border: 0;
+}
+.search-box-wrap button {
+    display: none;
+}
+::placeholder{
+ color: #ffffff !important;
+}
+
